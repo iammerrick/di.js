@@ -17,7 +17,8 @@ require.config({
   baseUrl: '/base',
 
   paths: {
-    'assert': './node_modules/pipe/node_modules/assert/dist/amd/assert'
+    'assert': './node_modules/pipe/node_modules/assert/dist/amd/assert',
+    'diary': './node_modules/diary/src'
   },
 
   // Dynamically load all test files and ES6 polyfill.

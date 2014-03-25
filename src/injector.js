@@ -1,7 +1,9 @@
 import {SuperConstructor, readAnnotations, hasAnnotation} from './annotations';
 import {isUpperCase, isClass, isFunction, isObject, toString} from './util';
 import {getUniqueId} from './profiler';
+import {Diary} from 'diary/diary';
 
+var logger = new Diary();
 
 var EmptyFunction = Object.getPrototypeOf(Function);
 
@@ -252,7 +254,7 @@ class Injector {
     }
 
     instance = instantiate(args, context, provider, resolving, token);
-
+    logger.info(`instantiated ${toString(token)}`);
     this.cache.set(token, instance);
 
     if (!wantPromise && provider.isPromise) {

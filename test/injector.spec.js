@@ -1,5 +1,6 @@
 import {Injector} from '../src/injector';
 import {Inject, Provide, SuperConstructor} from '../src/annotations';
+import {Diary} from 'diary/diary';
 
 module carModule from './fixtures/car';
 module houseModule from './fixtures/house';
@@ -422,6 +423,37 @@ describe('injector', function() {
       var child = parent.createChild([]);
 
       expect(child.get(Injector)).toBe(child);
+    });
+  });
+
+  
+  describe('logging', function() {
+    var mockReporter;
+    beforeEach(function() {
+      class MockReporter {
+        constructor() {
+          this.logs = [];
+        }
+
+        receive(message) {
+          this.logs.push(`${message.level}: ${message.message}`);
+        }
+      }
+
+      mockReporter = new MockReporter();
+      Diary.reporter(mockReporter);
+    });
+
+    afterEach(function() {
+      mockReporter.logs = [];
+    });
+    
+    it('should log object instantiation', function() {
+      expect(mockReporter.logs).toEqual([]);
+      class Car {}
+      var injector = new Injector([]);
+      var car = injector.get(Car);
+      expect(mockReporter.logs).toEqual(['info: instantiated Car']);
     });
   });
 });
