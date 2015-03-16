@@ -1,5 +1,5 @@
 {
-  "name": "di-till-ng-2",
+  "name": "di",
   "version": "2.0.0",
   "description": "A DI framework.",
   "main": "node/index.js",
