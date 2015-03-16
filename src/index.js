@@ -13,3 +13,7 @@ export {
   ClassProvider,
   FactoryProvider
 } from './annotations';
+export {
+  use,
+  inject
+} from './testing';
